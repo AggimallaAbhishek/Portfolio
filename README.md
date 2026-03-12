@@ -99,11 +99,6 @@ Services:
 
 ## Admin Credentials
 
-Default seeded credentials for local development:
-
-- Email: `admin@portfolio.com`
-- Password: `admin123`
-
 Change these in `.env` or `backend/.env` before deploying publicly.
 
 ## Environment Variables
