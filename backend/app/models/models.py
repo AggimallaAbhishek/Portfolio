@@ -149,7 +149,10 @@ class Experience(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     organization: Mapped[str] = mapped_column(String(255), nullable=False)
-    experience_type: Mapped[ExperienceType] = mapped_column(SqlEnum(ExperienceType), nullable=False)
+    # Explicitly name the enum to match the PostgreSQL type created in schema.sql
+    experience_type: Mapped[ExperienceType] = mapped_column(
+        SqlEnum(ExperienceType, name="experience_type"), nullable=False
+    )
     location: Mapped[str | None] = mapped_column(String(255))
     start_date: Mapped[date | None] = mapped_column(Date)
     end_date: Mapped[date | None] = mapped_column(Date)
