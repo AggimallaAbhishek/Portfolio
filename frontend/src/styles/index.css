@@ -38,6 +38,35 @@
   ::selection {
     background: rgba(86, 212, 221, 0.28);
   }
+
+  .name-glow {
+    text-shadow:
+      0 12px 30px rgba(5, 13, 24, 0.25),
+      0 0 1px rgba(0, 0, 0, 0.45);
+  }
+
+  html.light .name-glow {
+    text-shadow:
+      0 12px 32px rgba(5, 13, 24, 0.22),
+      0 0 1px rgba(5, 13, 24, 0.35);
+  }
+
+  .hero-ambient {
+    position: absolute;
+    inset: -30%;
+    background-image: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1800&q=80");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.18;
+    filter: blur(30px) saturate(1.2);
+    transform: translateZ(0);
+    pointer-events: none;
+  }
+
+  html.light .hero-ambient {
+    opacity: 0.22;
+    filter: blur(34px) saturate(1.05);
+  }
 }
 
 @layer components {

@@ -1,5 +1,5 @@
 import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 import type { DashboardSummary, Profile } from "../../types";
 
@@ -15,6 +15,11 @@ export function HeroSection({
   profile: Profile;
   summary: DashboardSummary;
 }) {
+  const { scrollYProgress } = useScroll();
+  const bgParallax = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
+  const statsParallax = useTransform(scrollYProgress, [0, 1], ["0%", "-12%"]);
+  const ambientParallax = useTransform(scrollYProgress, [0, 1], ["0%", "-22%"]);
+
   const [firstName, ...restName] = profile.name.trim().split(" ");
   const lastName = restName.join(" ");
   const highlightName = lastName || firstName;
@@ -46,8 +51,12 @@ export function HeroSection({
 
           <motion.div variants={fadeUp} className="space-y-5">
             <h1 className="font-display text-5xl leading-[0.95] text-slate-950 dark:text-white sm:text-6xl lg:text-7xl">
-              {headlineName ? `${headlineName} ` : null}
-              <span className="block bg-gradient-to-r from-cyan via-white to-coral bg-clip-text text-transparent">
+              {headlineName ? (
+                <span className="name-glow bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent dark:text-white">
+                  {headlineName}{" "}
+                </span>
+              ) : null}
+              <span className="name-glow block bg-gradient-to-r from-cyan via-slate-900/60 to-coral bg-clip-text text-transparent dark:from-cyan dark:via-white dark:to-coral">
                 {highlightName}
               </span>
             </h1>
@@ -97,8 +106,16 @@ export function HeroSection({
 
         <motion.div variants={fadeUp} className="relative">
           <div className="glass-card relative overflow-hidden p-8">
-            <div className="absolute inset-0 bg-hero-mesh opacity-80" />
-            <div className="relative space-y-8">
+            <motion.div
+              className="hero-ambient"
+              style={{ y: ambientParallax }}
+              aria-hidden
+            />
+            <motion.div
+              className="absolute inset-0 bg-hero-mesh opacity-80"
+              style={{ y: bgParallax as unknown as number }}
+            />
+            <div className="relative space-y-8" style={{ transform: `translateY(${statsParallax.get()})` }}>
               <div className="flex items-start justify-between">
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-cyan">Focus Areas</p>

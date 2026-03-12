@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { startTransition, useDeferredValue, useState } from "react";
 
@@ -9,6 +9,8 @@ import { SectionHeading } from "../common/SectionHeading";
 export function ProjectsSection({ projects }: { projects: Project[] }) {
   const [selectedTech, setSelectedTech] = useState("All");
   const deferredTech = useDeferredValue(selectedTech);
+  const { scrollYProgress } = useScroll();
+  const gridRise = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
 
   const technologies = ["All", ...Array.from(new Set(projects.flatMap((project) => project.tech_stack))).sort()];
   const filteredProjects =
@@ -46,7 +48,7 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <motion.div className="grid gap-6 lg:grid-cols-2" style={{ y: gridRise }}>
           {filteredProjects.map((project, index) => (
             <motion.article
               key={project.id}
@@ -128,7 +130,7 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

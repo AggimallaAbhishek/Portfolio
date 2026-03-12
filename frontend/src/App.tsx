@@ -8,6 +8,7 @@ import { AdminLoginPage } from "./pages/AdminLoginPage";
 import { BlogPage } from "./pages/BlogPage";
 import { BlogPostPage } from "./pages/BlogPostPage";
 import { HomePage } from "./pages/HomePage";
+import { ScrollProgressBar } from "./components/layout/ScrollProgressBar";
 
 function ProtectedRoute() {
   const { token, initializing } = useAuth();
@@ -50,6 +51,7 @@ export default function App() {
   return (
     <>
       <AnalyticsScripts />
+      <ScrollProgressBar />
       <RouterProvider router={router} />
     </>
   );

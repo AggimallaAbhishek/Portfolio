@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 import type { ExperienceItem } from "../../types";
 import { SectionHeading } from "../common/SectionHeading";
@@ -13,6 +13,9 @@ function formatDateRange(start?: string | null, end?: string | null) {
 }
 
 export function TimelineSection({ experiences }: { experiences: ExperienceItem[] }) {
+  const { scrollYProgress } = useScroll();
+  const lineGlow = useTransform(scrollYProgress, [0, 1], [1, 1.35]);
+
   return (
     <section id="timeline" className="section-gap">
       <div className="section-shell space-y-10">
@@ -23,6 +26,11 @@ export function TimelineSection({ experiences }: { experiences: ExperienceItem[]
         />
 
         <div className="relative space-y-8 before:absolute before:left-5 before:top-4 before:h-[calc(100%-2rem)] before:w-px before:bg-gradient-to-b before:from-cyan before:to-transparent md:before:left-1/2">
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute left-4 top-0 h-full w-[3px] rounded-full bg-cyan/60 blur-sm md:left-1/2"
+            style={{ scaleY: lineGlow, transformOrigin: "50% 0" }}
+          />
           {experiences.map((item, index) => (
             <motion.article
               key={item.id}
