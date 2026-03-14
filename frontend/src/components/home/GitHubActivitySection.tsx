@@ -32,7 +32,7 @@ export function GitHubActivitySection({ items }: { items: GitHubActivityItem[] }
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: index * 0.06 }}
               whileHover={{ y: -6 }}
-              className="glass-card flex h-full flex-col justify-between gap-6 p-6"
+              className="glass-card flex h-full flex-col justify-between gap-6 p-6 border-white/40 dark:border-white/20 bg-white/40 dark:bg-white/5"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">

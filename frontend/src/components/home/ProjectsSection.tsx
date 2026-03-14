@@ -66,18 +66,18 @@ export function ProjectsSection({ projects }: { projects: Project[] }) {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: index * 0.08 }}
               whileHover={{ y: -8 }}
-              className="glass-card overflow-hidden"
+              className="glass-card overflow-hidden border-white/40 dark:border-white/20 bg-white/40 dark:bg-white/5"
             >
               {project.images[0]?.image_url ? (
                 <div className="aspect-[16/10] overflow-hidden">
                   <img
                     src={toAssetUrl(project.images[0].image_url)}
                     alt={project.images[0].alt_text ?? project.title}
-                    className="h-full w-full object-cover transition duration-500 hover:scale-105"
+                    className="h-full w-full object-cover transition duration-700 hover:scale-105"
                   />
                 </div>
               ) : (
-                <div className="aspect-[16/10] bg-gradient-to-br from-cyan/25 via-slate-900 to-coral/20" />
+                <div className="aspect-[16/10] bg-gradient-to-br from-cyan/20 via-slate-900/50 to-coral/20 backdrop-blur-md" />
               )}
               <div className="space-y-5 p-7">
                 <div className="flex items-start justify-between gap-4">

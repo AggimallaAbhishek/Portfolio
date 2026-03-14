@@ -22,64 +22,58 @@
   }
 
   body {
-    @apply font-body antialiased transition-colors duration-300;
-    background:
-      radial-gradient(circle at top, rgba(86, 212, 221, 0.12), transparent 35%),
-      linear-gradient(180deg, #050d18 0%, #08111f 38%, #0b1524 100%);
+    @apply font-body antialiased transition-colors duration-500 text-slate-900 bg-slate-50 dark:text-slate-100 dark:bg-night;
     min-height: 100vh;
-  }
-
-  html.light body {
-    background:
-      radial-gradient(circle at top, rgba(86, 212, 221, 0.18), transparent 32%),
-      linear-gradient(180deg, #fbf6f0 0%, #f4f0ea 38%, #eef4f8 100%);
+    overflow-x: hidden;
   }
 
   ::selection {
-    background: rgba(86, 212, 221, 0.28);
+    background: rgba(45, 212, 191, 0.3);
   }
 
   .name-glow {
-    text-shadow:
-      0 12px 30px rgba(5, 13, 24, 0.25),
-      0 0 1px rgba(0, 0, 0, 0.45);
+    text-shadow: 0 0 40px rgba(45, 212, 191, 0.4);
   }
 
   html.light .name-glow {
-    text-shadow:
-      0 12px 32px rgba(5, 13, 24, 0.22),
-      0 0 1px rgba(5, 13, 24, 0.35);
-  }
-
-  .hero-ambient {
-    position: absolute;
-    inset: -30%;
-    background-image: url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1800&q=80");
-    background-size: cover;
-    background-position: center;
-    opacity: 0.18;
-    filter: blur(30px) saturate(1.2);
-    transform: translateZ(0);
-    pointer-events: none;
-  }
-
-  html.light .hero-ambient {
-    opacity: 0.22;
-    filter: blur(34px) saturate(1.05);
+    text-shadow: 0 0 30px rgba(45, 212, 191, 0.3);
   }
 }
 
 @layer components {
-  .glass-card {
-    @apply rounded-3xl border border-white/10 bg-white/10 shadow-glow backdrop-blur-xl;
+  /* The animated background container */
+  .aurora-bg {
+    @apply fixed inset-0 z-[-1] overflow-hidden pointer-events-none;
   }
 
-  html.light .glass-card {
-    @apply border-slate-300/60 bg-white/75;
+  /* The individual blurred orbs forming the aurora */
+  .aurora-orb {
+    @apply absolute rounded-full mix-blend-screen dark:mix-blend-color-dodge blur-[100px] opacity-40 dark:opacity-30;
+  }
+
+  .aurora-orb-1 {
+    @apply bg-cyan w-[600px] h-[600px] animate-aurora-1;
+  }
+
+  .aurora-orb-2 {
+    @apply bg-coral w-[500px] h-[500px] animate-aurora-2;
+  }
+
+  .aurora-orb-3 {
+    @apply bg-purple w-[700px] h-[700px] animate-aurora-3;
+  }
+
+  /* Heavy glassmorphism for all foreground cards */
+  .glass-card {
+    @apply rounded-3xl border border-white/20 bg-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] backdrop-blur-2xl shadow-glass-inset transition-all duration-300;
+  }
+
+  html.dark .glass-card {
+    @apply border-white/10 bg-slate-950/40 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)];
   }
 
   .section-shell {
-    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10;
   }
 
   .section-gap {

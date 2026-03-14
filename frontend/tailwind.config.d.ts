@@ -13,10 +13,12 @@ declare const _default: {
                 mist: string;
                 cyan: string;
                 coral: string;
+                purple: string;
                 sand: string;
             };
             boxShadow: {
                 glow: string;
+                "glass-inset": string;
             };
             backgroundImage: {
                 "hero-mesh": string;
@@ -30,9 +32,48 @@ declare const _default: {
                         transform: string;
                     };
                 };
+                "aurora-1": {
+                    "0%, 100%": {
+                        top: string;
+                        right: string;
+                        transform: string;
+                    };
+                    "50%": {
+                        top: string;
+                        right: string;
+                        transform: string;
+                    };
+                };
+                "aurora-2": {
+                    "0%, 100%": {
+                        bottom: string;
+                        left: string;
+                        transform: string;
+                    };
+                    "50%": {
+                        bottom: string;
+                        left: string;
+                        transform: string;
+                    };
+                };
+                "aurora-3": {
+                    "0%, 100%": {
+                        top: string;
+                        left: string;
+                        transform: string;
+                    };
+                    "50%": {
+                        top: string;
+                        left: string;
+                        transform: string;
+                    };
+                };
             };
             animation: {
                 float: string;
+                "aurora-1": string;
+                "aurora-2": string;
+                "aurora-3": string;
             };
         };
     };

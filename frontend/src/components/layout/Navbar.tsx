@@ -20,10 +20,10 @@ export function Navbar({ profile }: { profile?: Profile | null }) {
   const roleLabel = profile?.role?.split(" at ")[0] ?? "Data Science & AI";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-white/70 backdrop-blur-xl dark:bg-slate-950/70">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-white/30 backdrop-blur-2xl dark:bg-night/50">
       <div className="section-shell flex h-20 items-center justify-between gap-6">
         <Link to="/" className="flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan to-coral font-display text-lg font-bold text-slate-950">
+          <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan to-coral shadow-glow font-display text-lg font-bold text-slate-950">
             AA
           </span>
           <div>
@@ -42,18 +42,18 @@ export function Navbar({ profile }: { profile?: Profile | null }) {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-sm font-medium text-slate-600 transition hover:text-cyan dark:text-slate-300"
+                  className="text-sm font-medium text-slate-700 transition hover:text-cyan dark:text-slate-300"
                 >
                   {item.label}
                 </a>
               ))
             : null}
-          <Link to="/blog" className="text-sm font-medium text-slate-600 transition hover:text-cyan dark:text-slate-300">
+          <Link to="/blog" className="text-sm font-medium text-slate-700 transition hover:text-cyan dark:text-slate-300">
             Articles
           </Link>
           <Link
             to="/admin/login"
-            className="rounded-full border border-cyan/30 px-4 py-2 text-sm font-medium text-slate-800 transition hover:border-cyan hover:text-cyan dark:text-white"
+            className="rounded-full border border-cyan/30 bg-cyan/5 px-5 py-2 text-sm font-medium text-slate-800 transition hover:bg-cyan/20 hover:text-cyan dark:text-white"
           >
             Admin
           </Link>

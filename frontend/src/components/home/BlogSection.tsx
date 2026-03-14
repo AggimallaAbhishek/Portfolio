@@ -45,16 +45,16 @@ export function BlogSection({ posts }: { posts: BlogPost[] }) {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ delay: index * 0.08 }}
               whileHover={{ y: -8 }}
-              className="glass-card overflow-hidden"
+              className="glass-card overflow-hidden border-white/40 dark:border-white/20 bg-white/40 dark:bg-white/5"
             >
               {post.cover_image ? (
                 <img
                   src={toAssetUrl(post.cover_image)}
                   alt={post.title}
-                  className="h-52 w-full object-cover"
+                  className="h-52 w-full object-cover transition duration-700 hover:scale-105"
                 />
               ) : (
-                <div className="h-52 w-full bg-gradient-to-br from-cyan/25 via-slate-900 to-coral/20" />
+                <div className="h-52 w-full bg-gradient-to-br from-cyan/20 via-slate-900/50 to-purple/20 backdrop-blur-md" />
               )}
               <div className="space-y-4 p-6">
                 <div className="flex flex-wrap items-center gap-3">

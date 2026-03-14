@@ -47,9 +47,9 @@ export function TimelineSection({ experiences }: { experiences: ExperienceItem[]
                 }`}
               >
                 <span className="absolute left-0 top-6 h-10 w-10 rounded-full border border-cyan/30 bg-cyan/10 shadow-[0_0_0_10px_rgba(86,212,221,0.06)] md:left-1/2 md:-ml-5" />
-                <div className="glass-card p-6">
+                <div className="glass-card p-6 border-white/40 dark:border-white/20 bg-white/40 dark:bg-white/5">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-full border border-coral/30 bg-coral/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-coral">
+                    <span className="rounded-full border border-coral/40 bg-coral/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-coral">
                       {item.experience_type}
                     </span>
                     <span className="text-sm text-slate-500 dark:text-slate-400">
@@ -63,11 +63,11 @@ export function TimelineSection({ experiences }: { experiences: ExperienceItem[]
                     {item.organization}
                     {item.location ? ` • ${item.location}` : ""}
                   </p>
-                  <p className="mt-4 text-sm leading-7 text-slate-600 dark:text-slate-400">
+                  <p className="mt-4 text-sm leading-7 text-slate-700 dark:text-slate-300">
                     {item.description}
                   </p>
                   {item.highlight ? (
-                    <p className="mt-4 rounded-2xl border border-white/10 bg-white/60 px-4 py-3 text-sm text-slate-700 dark:bg-white/5 dark:text-slate-300">
+                    <p className="mt-4 rounded-2xl border border-white/30 bg-white/50 px-4 py-3 text-sm text-slate-800 dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
                       {item.highlight}
                     </p>
                   ) : null}

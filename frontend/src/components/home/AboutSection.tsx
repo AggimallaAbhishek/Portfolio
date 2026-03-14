@@ -19,9 +19,9 @@ export function AboutSection({ profile }: { profile: Profile }) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            className="glass-card p-6"
+            className="glass-card p-6 border-white/40 dark:border-white/20 bg-white/40 dark:bg-white/5"
           >
-            <p className="text-sm uppercase tracking-[0.3em] text-cyan">Why I build</p>
+            <p className="text-sm uppercase font-semibold tracking-[0.2em] text-cyan">Why I build</p>
             <p className="mt-4 text-base leading-8 text-slate-700 dark:text-slate-300">
               I’m especially interested in products where machine learning, secure backend design, and thoughtful UX need to work together. That intersection is where I do my best work.
             </p>
