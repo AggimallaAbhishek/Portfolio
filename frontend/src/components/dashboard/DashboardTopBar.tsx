@@ -1,4 +1,4 @@
-import { Bell, Search } from "lucide-react";
+import { Bell, Menu, Search } from "lucide-react";
 
 const sectionTitles = {
   overview: "Overview",
@@ -11,11 +11,21 @@ const sectionTitles = {
 interface DashboardTopBarProps {
   section: keyof typeof sectionTitles;
   unreadCount: number;
+  onMenuClick: () => void;
 }
 
-export function DashboardTopBar({ section, unreadCount }: DashboardTopBarProps) {
+export function DashboardTopBar({ section, unreadCount, onMenuClick }: DashboardTopBarProps) {
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-white/10 bg-slate-950/60 px-6 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-white/10 bg-slate-950/60 px-4 sm:px-6 backdrop-blur-xl">
+      <button
+        type="button"
+        onClick={onMenuClick}
+        className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-400 transition hover:border-white/20 hover:text-white lg:hidden"
+        aria-label="Toggle menu"
+      >
+        <Menu size={18} />
+      </button>
+
       <div className="flex-1">
         <p className="text-xs uppercase tracking-[0.25em] text-slate-500">Admin</p>
         <h1 className="font-display text-lg font-semibold text-white leading-tight">

@@ -25,6 +25,7 @@ export function AdminDashboardPage() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (!token) return;
@@ -98,16 +99,25 @@ export function AdminDashboardPage() {
       {/* Left Sidebar */}
       <DashboardSidebar
         active={active}
-        onChange={(s) => setActive(s as Section)}
+        onChange={(s) => {
+          setActive(s as Section);
+          setIsSidebarOpen(false); // Close on mobile navigation
+        }}
         userName={user?.full_name ?? "Admin"}
         userEmail={user?.email}
         unreadCount={unreadCount}
         onLogout={logout}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
 
-      {/* Content area — offset for sidebar */}
-      <div className="flex flex-1 flex-col ml-64 min-h-screen">
-        <DashboardTopBar section={active} unreadCount={unreadCount} />
+      {/* Content area — offset for sidebar on large screens */}
+      <div className="flex flex-1 flex-col min-h-screen lg:ml-64">
+        <DashboardTopBar
+          section={active}
+          unreadCount={unreadCount}
+          onMenuClick={() => setIsSidebarOpen(true)}
+        />
 
         <main className="flex-1 p-6 lg:p-8 space-y-8">
           {loading ? <LoadingPanel label="Loading dashboard…" /> : null}
@@ -163,17 +173,17 @@ export function AdminDashboardPage() {
                 <div className="glass-card p-6 space-y-4">
                   <h2 className="font-display text-sm font-semibold text-white mb-2">Quick Actions</h2>
                   {[
-                    { label: "Add a new project", icon: Rocket, onClick: () => setActive("projects"), color: "cyan" },
-                    { label: "Write a blog post", icon: NotebookTabs, onClick: () => setActive("blog"), color: "purple" },
-                    { label: "Read messages", icon: CheckCheck, onClick: () => setActive("messages"), color: "coral" }
-                  ].map(({ label, icon: Icon, onClick, color }) => (
+                    { label: "Add a new project", icon: Rocket, onClick: () => setActive("projects"), colorClass: "text-cyan" },
+                    { label: "Write a blog post", icon: NotebookTabs, onClick: () => setActive("blog"), colorClass: "text-purple-400" },
+                    { label: "Read messages", icon: CheckCheck, onClick: () => setActive("messages"), colorClass: "text-coral" }
+                  ].map(({ label, icon: Icon, onClick, colorClass }) => (
                     <button
                       key={label}
                       type="button"
                       onClick={onClick}
                       className="flex w-full items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300 transition hover:border-white/20 hover:bg-white/10 hover:text-white"
                     >
-                      <Icon size={16} className={`text-${color}`} />
+                      <Icon size={16} className={colorClass} />
                       {label}
                     </button>
                   ))}

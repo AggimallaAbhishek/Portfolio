@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   FolderKanban,
   LayoutDashboard,
@@ -6,7 +6,8 @@ import {
   Mailbox,
   NotebookTabs,
   Settings,
-  SquareUser
+  SquareUser,
+  X
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -27,6 +28,8 @@ interface DashboardSidebarProps {
   userEmail?: string;
   unreadCount: number;
   onLogout: () => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function DashboardSidebar({
@@ -35,7 +38,9 @@ export function DashboardSidebar({
   userName,
   userEmail,
   unreadCount,
-  onLogout
+  onLogout,
+  isOpen,
+  onClose
 }: DashboardSidebarProps) {
   const initials = userName
     .split(" ")
@@ -45,22 +50,44 @@ export function DashboardSidebar({
     .toUpperCase();
 
   return (
-    <motion.aside
-      initial={{ x: -20, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
-      className="fixed left-0 top-0 z-40 flex h-screen w-64 flex-col border-r border-white/10 bg-slate-950/80 backdrop-blur-2xl"
-    >
-      {/* Logo */}
-      <div className="flex h-16 items-center gap-3 border-b border-white/10 px-5">
-        <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-cyan to-coral text-sm font-bold text-slate-950">
-          AA
-        </span>
-        <div>
-          <p className="text-sm font-semibold text-white">Admin Panel</p>
-          <p className="text-[10px] text-slate-500 uppercase tracking-widest">Portfolio CMS</p>
+    <>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 z-40 bg-slate-950/80 backdrop-blur-sm lg:hidden"
+          />
+        )}
+      </AnimatePresence>
+
+      <motion.aside
+        initial={false}
+        animate={{ x: isOpen ? 0 : "-100%" }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-white/10 bg-slate-950 shadow-2xl lg:translate-x-0"
+      >
+        {/* Logo */}
+        <div className="flex h-16 shrink-0 items-center justify-between border-b border-white/10 px-5">
+          <div className="flex items-center gap-3">
+            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-cyan to-coral text-sm font-bold text-slate-950">
+              AA
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-white">Admin Panel</p>
+              <p className="text-[10px] text-slate-500 uppercase tracking-widest">Portfolio CMS</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-slate-400 lg:hidden"
+          >
+            <X size={16} />
+          </button>
         </div>
-      </div>
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto px-3 py-5 space-y-1">
@@ -130,6 +157,7 @@ export function DashboardSidebar({
           </div>
         </div>
       </div>
-    </motion.aside>
+      </motion.aside>
+    </>
   );
 }
